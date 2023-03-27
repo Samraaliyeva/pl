@@ -1,30 +1,12 @@
 pipeline {
-  agent { 
-    docker { 
-      image 'mcr.microsoft.com/playwright:v1.17.2-focal'
-    } 
-  }
-  stages {
-   
-    }
-    stage('help') {
-      steps {
-        sh 'npx playwright test --help'
+   agent { docker { image 'mcr.microsoft.com/playwright:v1.32.0-focal' } }
+   stages {
+      stage('e2e-tests') {
+         steps {
+            // Depends on your language / test framework
+            sh 'npm install'
+            sh 'npx playwright test'
+         }
       }
-    }
-    stage('test') {
-      steps {
-        sh '''
-          npx playwright test --list
-          npx playwright test
-        '''
-      }
-      post {
-        success {
-          archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
-          sh 'rm -rf *.png'
-        }
-      }
-    }
-  }
-
+   }
+}
