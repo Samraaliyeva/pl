@@ -31,5 +31,5 @@ await page.click("(//li[@id='item-2'])[1]");
 
 await page.click("(//label[@class='custom-control-label'])[2]");
 
-await page.click("(//li[@id='item-3'])[1]");
+
 })
